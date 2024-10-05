@@ -107,6 +107,16 @@ def countViolations(array):
 
 # open the input File
 
+bigArray = []
+
+with open("input_backup.txt") as input:
+    firstLine = input.readline().split()
+    rows = firstLine[0]
+    cols = firstLine[1]
+
+    for line in input:
+        bigArray.append(list(line))
+
 # turn into an array of arrays
 # each line in the input file = one index of big array
 
