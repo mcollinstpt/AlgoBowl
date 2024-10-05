@@ -67,28 +67,28 @@ def changeToBulb(i, j, bigArray):
 # surroundedFunction/unlitFunction
 # reads in .'s to find single cell lights
 def unlitFunction(i, j, bigArray, counter, symbol):
-    #check below
-    if (i != 0):
-        if (bigArray[i][j-1] in "x123"):
-            # light up funct
-    
-    #check above
-
-
     # checking corners
     if (i == 0):
         # upper left
         if (j == 0):
-            if ()
+            if ((bigArray[i+1][j] in "X123") and (bigArray[i][j+1] in "X123")):
+                # place light
         # upper right
         if (j == len(bigArray[0])):
-            
+            if ((bigArray[i+1][j] in "X123") and (bigArray[i][j-1] in "X123")):
+                # place light
+
     if (i = len(bigArray)):
         # lower left
         if (j = 0):
-        
+            if ((bigArray[i-1][j] in "X123") and (bigArray[i][j+1] in "X123")):
+                # place light
         #lower right
         if (j == len(bigArray[len(bigArray)])):
+            if ((bigArray[i-1][j] in "X123") and (bigArray[i][j-1] in "X123")):
+
+    # non corners
+    if ( (bigArray[i-1][j] in "X123") and (bigArray[i+1][j] in "X123") and (bigArray[i][j+1] in "X123") and (bigArray[i][j-1] in "X123"))
 
 
 #     if(i!=0, i!= maxI...)
