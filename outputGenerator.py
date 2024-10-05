@@ -46,22 +46,22 @@ def changeToBulb(i, j, bigArray):
     for cell in range(i+1, len(bigArray)-1):
         if(bigArray[cell][j] == "."):
             bigArray[cell][j] == "*"
-        elif(bigArray[cell][j] != "*" and bigArray[i][cell] != "L"):
+        elif(bigArray[cell][j] != "*"):
             break
     for cell in range(j+1, len(bigArray[i])-1):
         if(bigArray[i][cell] == "."):
             bigArray[i][cell] == "*"
-        elif(bigArray[i][cell] != "*" and bigArray[i][cell] != "L"):
+        elif(bigArray[i][cell] != "*"):
             break
     for cell in range(i-1, 0, -1):
         if(bigArray[cell][j] == "."):
             bigArray[cell][j] == "*"
-        elif(bigArray[cell][j] != "*" and bigArray[i][cell] != "L"):
+        elif(bigArray[cell][j] != "*"):
             break
     for cell in range(j-1, 0, -1):
         if(bigArray[i][cell] == "."):
             bigArray[i][cell] == "*"
-        elif(bigArray[i][cell] != "*" and bigArray[i][cell] != "L"):
+        elif(bigArray[i][cell] != "*"):
             break
 
 # surroundedFunction/unlitFunction
@@ -90,7 +90,10 @@ def unlitFunction(i, j, bigArray, counter, symbol):
     # non corners
     if ( (bigArray[i-1][j] in "X123") and (bigArray[i+1][j] in "X123") and (bigArray[i][j+1] in "X123") and (bigArray[i][j-1] in "X123"))
 
-
+def isValid(array):
+    print("TODO: write isValid(array)")
+def countViolations(array):
+    print("TODO: write countViolations(array)")
 #     if(i!=0, i!= maxI...)
 #         if(i+1 == "X" and i-1== "X", ...):
 #             replace with *
