@@ -31,19 +31,20 @@ def numberFunc(i, j, bigArray, counter, unlitCells):
         counter += 1
         if(i != 0):
             if(bigArray[i-1][j] == "."):
-                changeToBulb(i,j,bigArray,unlitCells)
+                changeToBulb(i-1,j,bigArray,unlitCells)
         if(i != len(bigArray)-1):
             if(bigArray[i+1][j] == "."):
-                changeToBulb(i,j,bigArray,unlitCells)
+                changeToBulb(i+1,j,bigArray,unlitCells)
         if(j != 0):
             if(bigArray[i][j-1] == "."):
-                changeToBulb(i,j,bigArray,unlitCells)
+                changeToBulb(i,j-1,bigArray,unlitCells)
         if(j != len(bigArray[i])-1):
             if(bigArray[i][j+1] == "."):
-                changeToBulb(i,j,bigArray,unlitCells)
+                changeToBulb(i,j+1,bigArray,unlitCells)
 
 def changeToBulb(i, j, bigArray, unlitCells):
     bigArray[i][j] = "L"
+    lights.append((i,j))
     if((i,j) in unlitCells):
         unlitCells.remove((i,j))
     for cell in range(i+1, len(bigArray)-1):
@@ -234,15 +235,26 @@ if len(unlitCells) > 0:
             invalid = isValid(tempArray)
             if(len(unlitCells) == 0):
                 break
-            print(bigArray)
-            print(unlitCells)
-        print("end while")
         for light in lights:
             findLitLight(light[0],light[1],tempArray)
-        print(bigArray)
         violations = countViolations(tempArray)
         if(violations < prevViolations):
             bestArray = tempArray
+
+outputFile = open(sys.argv[2], "w")
+outputFile.write(str(violations))
+outputFile.write("\n")
+for i in range(0,len(bestArray)):
+    for j in range(0,len(bestArray[i])):
+        if(bestArray[i][j] == "*"):
+            outputFile.write(".")
+        elif(bestArray[i][j] == "B"):
+            outputFile.write("L")
+        else:
+            outputFile.write(bigArray[i][j])
+    outputFile.write("\n")
+
+outputFile.close()
 
 
 # turn grid back to normal ("*" == "." and so forth)
