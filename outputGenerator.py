@@ -64,6 +64,10 @@ def changeToBulb(i, j, bigArray):
         elif(bigArray[i][cell] != "*" and bigArray[i][cell] != "L"):
             break
 
+def isValid(array):
+    print("TODO: write isValid(array)")
+def countViolations(array):
+    print("TODO: write countViolations(array)")
 # unlitFunction:
 #     if(i!=0, i!= maxI...)
 #         if(i+1 == "X" and i-1== "X", ...):
