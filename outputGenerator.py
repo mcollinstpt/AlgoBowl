@@ -117,7 +117,7 @@ with open("input_backup.txt") as input:
     cols = firstLine[1]
 
     for line in input:
-        bigArray.append(list(line))
+        bigArray.append(list(line.replace("\n","")))
 
 # turn into an array of arrays
 # each line in the input file = one index of big array
