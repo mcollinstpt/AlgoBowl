@@ -72,23 +72,30 @@ def unlitFunction(i, j, bigArray, counter, symbol):
         # upper left
         if (j == 0):
             if ((bigArray[i+1][j] in "X123") and (bigArray[i][j+1] in "X123")):
-                # place light
+                changeToBulb(i, j, bigArray)
+                counter += 1
         # upper right
         if (j == len(bigArray[0])):
             if ((bigArray[i+1][j] in "X123") and (bigArray[i][j-1] in "X123")):
-                # place light
+                changeToBulb(i, j, bigArray)
+                counter += 1
 
-    if (i = len(bigArray)):
+    if (i == len(bigArray)):
         # lower left
-        if (j = 0):
+        if (j == 0):
             if ((bigArray[i-1][j] in "X123") and (bigArray[i][j+1] in "X123")):
-                # place light
-        #lower right
+                changeToBulb(i, j, bigArray)
+                counter += 1       
+                #lower right
         if (j == len(bigArray[len(bigArray)])):
             if ((bigArray[i-1][j] in "X123") and (bigArray[i][j-1] in "X123")):
+                changeToBulb(i, j, bigArray)
+                counter += 1
 
     # non corners
-    if ( (bigArray[i-1][j] in "X123") and (bigArray[i+1][j] in "X123") and (bigArray[i][j+1] in "X123") and (bigArray[i][j-1] in "X123"))
+    if ( (bigArray[i-1][j] in "X123") and (bigArray[i+1][j] in "X123") and (bigArray[i][j+1] in "X123") and (bigArray[i][j-1] in "X123")):
+        changeToBulb(i, j, bigArray)
+        counter += 1
 
 def isValid(array):
     print("TODO: write isValid(array)")
