@@ -1,3 +1,5 @@
+import random
+
 # numberFunction:
 #     if(num == 3 and i == 0 and j!=0 and j!= maxJ)
 #         j-1 == *
@@ -43,5 +45,22 @@
 #         count violations
 #         if violations < minViolations
 #             save grid
+prevViolations = 1000000000
+numReplications = 10
+bestArray = []
+if unlitCells:
+    for i in range(0, numReplications):
+        invalid = false
+        tempArray = bigArray
+        while invalid:
+            randomRow = random.randrange(0, len(bigArray))
+            randomCol = random.randrange(0, len(smallArray))
+            if tempArray[randomRow][randomCol] == '.':
+                changeToBulb(randomeRow, randomCol, tempArray)
+            invalid = isValid(tempArray)
+        violations = countViolations(tempArray)
+        if violations < prevViolations:
+            bestArray = tempArray
+
 
 # turn grid back to normal ("*" == "." and so forth)
