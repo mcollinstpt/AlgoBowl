@@ -11,7 +11,33 @@
 #             place *
 #             counter += 1
 
-# unlitFunction:
+# surroundedFunction/unlitFunction
+# reads in .'s to find single cell lights
+def unlitFunction(i, j, bigArray, counter, symbol):
+    #check below
+    if (i != 0):
+        if (bigArray[i][j-1] in "x123"):
+            # light up funct
+    
+    #check above
+
+
+    # checking corners
+    if (i == 0):
+        # upper left
+        if (j == 0):
+            if ()
+        # upper right
+        if (j == len(bigArray[0])):
+            
+    if (i = len(bigArray)):
+        # lower left
+        if (j = 0):
+        
+        #lower right
+        if (j == len(bigArray[len(bigArray)])):
+
+
 #     if(i!=0, i!= maxI...)
 #         if(i+1 == "X" and i-1== "X", ...):
 #             replace with *
