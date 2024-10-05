@@ -13,7 +13,7 @@ import sys
 #         if unlit == 3
 #             place *
 #             counter += 1
-def numberFunc(i, j, bigArray, counter, unlitCells):
+def numberFunc(i, j, bigArray, counter, unlitCells, lightList):
     unlit = 0
     if(i != 0):
         if(bigArray[i-1][j] == "."):
@@ -31,20 +31,20 @@ def numberFunc(i, j, bigArray, counter, unlitCells):
         counter += 1
         if(i != 0):
             if(bigArray[i-1][j] == "."):
-                changeToBulb(i-1,j,bigArray,unlitCells)
+                changeToBulb(i-1,j,bigArray,unlitCells,lightList)
         if(i != len(bigArray)-1):
             if(bigArray[i+1][j] == "."):
-                changeToBulb(i+1,j,bigArray,unlitCells)
+                changeToBulb(i+1,j,bigArray,unlitCells, lightList)
         if(j != 0):
             if(bigArray[i][j-1] == "."):
-                changeToBulb(i,j-1,bigArray,unlitCells)
+                changeToBulb(i,j-1,bigArray,unlitCells, lightList)
         if(j != len(bigArray[i])-1):
             if(bigArray[i][j+1] == "."):
-                changeToBulb(i,j+1,bigArray,unlitCells)
+                changeToBulb(i,j+1,bigArray,unlitCells, lightList)
 
-def changeToBulb(i, j, bigArray, unlitCells):
+def changeToBulb(i, j, bigArray, unlitCells, lightList):
     bigArray[i][j] = "L"
-    lights.append((i,j))
+    lightList.append((i,j))
     if((i,j) in unlitCells):
         unlitCells.remove((i,j))
     for cell in range(i+1, len(bigArray)-1):
@@ -76,56 +76,56 @@ def changeToBulb(i, j, bigArray, unlitCells):
         elif(bigArray[i][cell] != "*"):
             break
 
-def findLitLight(i,j,bigArray):
-    for cell in range(i+1, len(bigArray)-1):
-        if(bigArray[cell][j] == "L"):
-            bigArray[i][j] = "B"
+def findLitLight(i,j,wackyArray):
+    for cell in range(i+1, len(wackyArray)):
+        if(wackyArray[cell][j] == "L" or wackyArray[cell][j] == "B"):
+            wackyArray[i][j] = "B"
             break
-    for cell in range(j+1, len(bigArray[i])-1):
-        if(bigArray[i][cell] == "L"):
-            bigArray[i][j] = "B"
+    for cell in range(j+1, len(wackyArray[i])):
+        if(wackyArray[i][cell] == "L" or wackyArray[i][cell] == "B"):
+            wackyArray[i][j] = "B"
             break
-    for cell in range(i-1, 0, -1):
-        if(bigArray[cell][j] == "L"):
-            bigArray[i][j] = "B"
+    for cell in range(i-1, -1, -1):
+        if(wackyArray[cell][j] == "L" or wackyArray[cell][j] == "B"):
+            wackyArray[i][j] = "B"
             break
-    for cell in range(j-1, 0, -1):
-        if(bigArray[i][cell] == "L"):
-            bigArray[i][j] = "B"
+    for cell in range(j-1, -1, -1):
+        if(wackyArray[i][cell] == "L" or wackyArray[i][cell] == "B"):
+            wackyArray[i][j] = "B"
             break
 
 # surroundedFunction/unlitFunction
 # reads in .'s to find single cell lights
-def surrounded(i, j, bigArray, counter,unlitCells):
+def surrounded(i, j, bigArray, counter,unlitCells, lightList):
     # checking corners
     if (i == 0):
         # upper left
         if (j == 0):
             if ((bigArray[i+1][j] in "X123") and (bigArray[i][j+1] in "X123")):
-                changeToBulb(i, j, bigArray,unlitCells)
+                changeToBulb(i, j, bigArray,unlitCells, lightList)
                 counter += 1
         # upper right
         if (j == len(bigArray[i])):
             if ((bigArray[i+1][j] in "X123") and (bigArray[i][j-1] in "X123")):
-                changeToBulb(i, j, bigArray,unlitCells)
+                changeToBulb(i, j, bigArray,unlitCells, lightList)
                 counter += 1
 
     if (i == len(bigArray)):
         # lower left
         if (j == 0):
             if ((bigArray[i-1][j] in "X123") and (bigArray[i][j+1] in "X123")):
-                changeToBulb(i, j, bigArray)
+                changeToBulb(i, j, bigArray, lightList)
                 counter += 1       
                 #lower right
         if (j == len(bigArray[i])):
             if ((bigArray[i-1][j] in "X123") and (bigArray[i][j-1] in "X123")):
-                changeToBulb(i, j, bigArray)
+                changeToBulb(i, j, bigArray, lightList)
                 counter += 1
 
     # non corners
     if(i!=0 and j!=0 and i!=len(bigArray)-1 and j!=len(bigArray[i])-1):
         if ( (bigArray[i-1][j] in "X123") and (bigArray[i+1][j] in "X123") and (bigArray[i][j+1] in "X123") and (bigArray[i][j-1] in "X123")):
-            changeToBulb(i, j, bigArray,unlitCells)
+            changeToBulb(i, j, bigArray,unlitCells, lightList)
             counter += 1
 
 def isValid(array):
@@ -139,32 +139,34 @@ def isValid(array):
             break
     return unlitCells2
 
-def countViolations(bigArray):
+def countViolations(coolArray):
     numVi = 0
-    for i in range(0, len(bigArray)):
-        for j in range(0, len(bigArray[i])):
-            if(bigArray[i][j] == "B"):
+    for i in range(0, len(coolArray)):
+        for j in range(0, len(coolArray[i])):
+            if(coolArray[i][j] == "B"):
                 numVi += 1
-            elif(bigArray[i][j] != "*" and bigArray[i][j] != "L" and bigArray[i][j] != "X"):
-                verifyNumbers(i,j,bigArray,numVi)
+            elif(coolArray[i][j] != "*" and coolArray[i][j] != "L" and coolArray[i][j] != "B" and coolArray[i][j] != "X"):
+                numVi += verifyNumbers(i,j,coolArray)
     return numVi
 
-def verifyNumbers(i,j,bigArray,viCount):
+def verifyNumbers(i,j,bigArray):
+    viCount = 0
     bulbs = 0
     if(i != 0):
-        if(bigArray[i-1][j] in "LB"):
+        if(bigArray[i-1][j] == "L" or bigArray[i-1][j] == "B"):
             bulbs += 1
     if(i != len(bigArray)-1):
-        if(bigArray[i+1][j] in "LB"):
+        if(bigArray[i+1][j] == "L" or bigArray[i+1][j] == "B"):
             bulbs += 1
     if(j != 0):
-        if(bigArray[i][j-1] in "LB"):
+        if(bigArray[i][j-1] == "L" or bigArray[i][j-1] == "B"):
             bulbs += 1
     if(j != len(bigArray[i])-1):
-        if(bigArray[i][j+1] in "LB"):
+        if(bigArray[i][j+1] == "L" or bigArray[i][j+1] == "B"):
             bulbs += 1
     if(bulbs != int(bigArray[i][j])):
         viCount+=1
+    return viCount
 #     if(i!=0, i!= maxI...)
 #         if(i+1 == "X" and i-1== "X", ...):
 #             replace with *
@@ -204,9 +206,9 @@ while True:
     for i in range(0, len(bigArray)):
         for j in range(0,len(bigArray[i])):
             if(not (bigArray[i][j] in ".*LX")):
-                numberFunc(i,j,bigArray,counter,unlitCells)
+                numberFunc(i,j,bigArray,counter,unlitCells, lights)
             if(bigArray[i][j] == "."):
-                surrounded(i,j,bigArray,counter,unlitCells)
+                surrounded(i,j,bigArray,counter,unlitCells, lights)
     if(counter == 0):
         break
 # check if any unlit cells remain
@@ -221,21 +223,21 @@ while True:
 #             save grid
 
 prevViolations = 1000000000
-numReplications = 1
+numReplications = 1000
 bestArray = []
 if len(unlitCells) > 0:
     for i in range(0, numReplications):
-        lights = []
+        tempLights = lights
         invalid = True
         tempArray = bigArray
         while invalid:
             randomCell = random.randrange(0, len(unlitCells))
             if tempArray[unlitCells[randomCell][0]][unlitCells[randomCell][1]] == '.':
-                changeToBulb(unlitCells[randomCell][0], unlitCells[randomCell][1], tempArray, unlitCells)
+                changeToBulb(unlitCells[randomCell][0], unlitCells[randomCell][1], tempArray, unlitCells, tempLights)
             invalid = isValid(tempArray)
             if(len(unlitCells) == 0):
                 break
-        for light in lights:
+        for light in tempLights:
             findLitLight(light[0],light[1],tempArray)
         violations = countViolations(tempArray)
         if(violations < prevViolations):

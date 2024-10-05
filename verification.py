@@ -71,7 +71,7 @@ for i in range(0, len(bigArray)):
     for j in range(0, len(bigArray[i])):
         if(bigArray[i][j] == "L"):
             changeToBulb(i,j,bigArray)
-            findLitLight()
+            findLitLight(i,j,bigArray)
 
 invalid = False
 
