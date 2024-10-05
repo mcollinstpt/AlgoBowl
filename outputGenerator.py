@@ -12,6 +12,57 @@ import random
 #         if unlit == 3
 #             place *
 #             counter += 1
+def numberFunc(i, j, bigArray, counter, symbol):
+    unlit = 0
+    if(i != 0):
+        if(bigArray[i-1][j] == "."):
+            unlit += 1
+    if(i != len(bigArray)-1):
+        if(bigArray[i+1][j] == "."):
+            unlit += 1
+    if(j != 0):
+        if(bigArray[i][j-1] == "."):
+            unlit += 1
+    if(j != len(bigArray[i])-1):
+        if(bigArray[i][j+1] == "."):
+            unlit += 1
+    if(unlit == int(symbol)):
+        counter += 1
+        if(i != 0):
+            if(bigArray[i-1][j] == "."):
+                changeToBulb()
+        if(i != len(bigArray)):
+            if(bigArray[i+1][j] == "."):
+                changeToBulb()
+        if(j != 0):
+            if(bigArray[i][j-1] == "."):
+                changeToBulb()
+        if(j != len(bigArray[i])):
+            if(bigArray[i][j+1] == "."):
+                changeToBulb()
+
+def changeToBulb(i, j, bigArray):
+    bigArray[i][j] == "L"
+    for cell in range(i+1, len(bigArray)-1):
+        if(bigArray[cell][j] == "."):
+            bigArray[cell][j] == "*"
+        elif(bigArray[cell][j] != "*" and bigArray[i][cell] != "L"):
+            break
+    for cell in range(j+1, len(bigArray[i])-1):
+        if(bigArray[i][cell] == "."):
+            bigArray[i][cell] == "*"
+        elif(bigArray[i][cell] != "*" and bigArray[i][cell] != "L"):
+            break
+    for cell in range(i-1, 0, -1):
+        if(bigArray[cell][j] == "."):
+            bigArray[cell][j] == "*"
+        elif(bigArray[cell][j] != "*" and bigArray[i][cell] != "L"):
+            break
+    for cell in range(j-1, 0, -1):
+        if(bigArray[i][cell] == "."):
+            bigArray[i][cell] == "*"
+        elif(bigArray[i][cell] != "*" and bigArray[i][cell] != "L"):
+            break
 
 # unlitFunction:
 #     if(i!=0, i!= maxI...)
@@ -31,7 +82,6 @@ import random
 #             bunch of ifs
 #             ex: if(symbol != ".", "X"):
 #                     do numberfunction
-#                     do unlit function
 #     if counter == 0
 #         break
 
@@ -45,18 +95,27 @@ import random
 #         count violations
 #         if violations < minViolations
 #             save grid
+unlitCells = False
+for i in range(0, len(bigArray)):
+    for j in range(0, len(bigArray[i])):
+        if(bigArray[i][j] == "."):
+            unlitCells = True
+            break
+    if(unlitCells):
+        break
+
 prevViolations = 1000000000
 numReplications = 10
 bestArray = []
 if unlitCells:
     for i in range(0, numReplications):
-        invalid = false
+        invalid = False
         tempArray = bigArray
         while invalid:
             randomRow = random.randrange(0, len(bigArray))
-            randomCol = random.randrange(0, len(smallArray))
+            randomCol = random.randrange(0, len(bigArray[randomRow]))
             if tempArray[randomRow][randomCol] == '.':
-                changeToBulb(randomeRow, randomCol, tempArray)
+                changeToBulb(randomRow, randomCol, tempArray)
             invalid = isValid(tempArray)
         violations = countViolations(tempArray)
         if violations < prevViolations:
