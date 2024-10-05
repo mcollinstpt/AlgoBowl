@@ -46,22 +46,22 @@ def changeToBulb(i, j, bigArray):
     for cell in range(i+1, len(bigArray)-1):
         if(bigArray[cell][j] == "."):
             bigArray[cell][j] == "*"
-        elif(bigArray[cell][j] != "*" and bigArray[i][cell] != "L"):
+        elif(bigArray[cell][j] != "*"):
             break
     for cell in range(j+1, len(bigArray[i])-1):
         if(bigArray[i][cell] == "."):
             bigArray[i][cell] == "*"
-        elif(bigArray[i][cell] != "*" and bigArray[i][cell] != "L"):
+        elif(bigArray[i][cell] != "*"):
             break
     for cell in range(i-1, 0, -1):
         if(bigArray[cell][j] == "."):
             bigArray[cell][j] == "*"
-        elif(bigArray[cell][j] != "*" and bigArray[i][cell] != "L"):
+        elif(bigArray[cell][j] != "*"):
             break
     for cell in range(j-1, 0, -1):
         if(bigArray[i][cell] == "."):
             bigArray[i][cell] == "*"
-        elif(bigArray[i][cell] != "*" and bigArray[i][cell] != "L"):
+        elif(bigArray[i][cell] != "*"):
             break
 
 def isValid(array):
