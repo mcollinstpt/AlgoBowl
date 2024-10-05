@@ -99,8 +99,10 @@ def unlitFunction(i, j, bigArray, counter, symbol):
 
 def isValid(array):
     print("TODO: write isValid(array)")
+    return False
 def countViolations(array):
     print("TODO: write countViolations(array)")
+    return False
 #     if(i!=0, i!= maxI...)
 #         if(i+1 == "X" and i-1== "X", ...):
 #             replace with *
@@ -110,7 +112,7 @@ def countViolations(array):
 bigArray = []
 
 with open("input_backup.txt") as input:
-    firstLine = input.readline().split()
+    firstLine = input.readline().replace("\n","").split()
     rows = firstLine[0]
     cols = firstLine[1]
 
@@ -164,7 +166,7 @@ if unlitCells:
                 changeToBulb(randomRow, randomCol, tempArray)
             invalid = isValid(tempArray)
         violations = countViolations(tempArray)
-        if violations < prevViolations:
+        if(violations < prevViolations):
             bestArray = tempArray
 
 
