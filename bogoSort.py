@@ -102,28 +102,29 @@ for i in range(0, len(bigArray)):
     if(unlitCells):
         break
 
-prevViolations = 1000000000
-numReplications = 1000000000
+minViolations = 1000000000
+numReplications = 10000000000
 bestArray = []
 if unlitCells:
     for i in range(0, numReplications):
         invalid = True
-        tempArray = bigArray.copy()
+        tempArray = bigArray[:]
         tempLights = []
         while invalid:
-            randomRow = random.randrange(0, len(bigArray))
-            randomCol = random.randrange(0, len(bigArray[randomRow]))
+            randomRow = random.randint(0, len(bigArray)-1)
+            randomCol = random.randint(0, len(bigArray[randomRow])-1)
             if tempArray[randomRow][randomCol] == '.':
                 changeToBulb(randomRow, randomCol, tempArray, tempLights)
             invalid = isValid(tempArray)
         for light in tempLights:
             findLitLight(light[0],light[1],tempArray)
         violations = countViolations(tempArray)
-        if violations < prevViolations:
-            bestArray = tempArray.copy()
+        if violations < minViolations:
+            bestArray = tempArray[:]
+            minViolations = violations
 
 outputFile = open(sys.argv[2], "w")
-outputFile.write(str(violations))
+outputFile.write(str(minViolations))
 outputFile.write("\n")
 for i in range(0,len(bestArray)):
     for j in range(0,len(bestArray[i])):

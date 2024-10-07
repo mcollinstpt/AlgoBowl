@@ -222,29 +222,30 @@ while True:
 #         if violations < minViolations
 #             save grid
 
-prevViolations = 1000000000
+minViolations = 1000000000
 numReplications = 1000
 bestArray = []
 if len(unlitCells) > 0:
     for i in range(0, numReplications):
-        tempLights = lights
+        tempLights = lights[:]
         invalid = True
-        tempArray = bigArray
+        tempArray = bigArray[:]
         while invalid:
+            if(len(unlitCells) == 0):
+                break
             randomCell = random.randrange(0, len(unlitCells))
             if tempArray[unlitCells[randomCell][0]][unlitCells[randomCell][1]] == '.':
                 changeToBulb(unlitCells[randomCell][0], unlitCells[randomCell][1], tempArray, unlitCells, tempLights)
             invalid = isValid(tempArray)
-            if(len(unlitCells) == 0):
-                break
         for light in tempLights:
             findLitLight(light[0],light[1],tempArray)
         violations = countViolations(tempArray)
-        if(violations < prevViolations):
-            bestArray = tempArray
+        if(violations < minViolations):
+            bestArray = tempArray[:]
+            minViolations = violations
 
 outputFile = open(sys.argv[2], "w")
-outputFile.write(str(violations))
+outputFile.write(str(minViolations))
 outputFile.write("\n")
 for i in range(0,len(bestArray)):
     for j in range(0,len(bestArray[i])):
