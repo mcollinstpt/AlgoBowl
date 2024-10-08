@@ -1,8 +1,7 @@
 import sys
 
-def changeToBulb(i, j, bigArray, lightList):
+def changeToBulb(i, j, bigArray):
     bigArray[i][j] = "L"
-    lightList.append((i,j))
     for cell in range(i+1, len(bigArray)):
         if(bigArray[cell][j] == "."):
             bigArray[cell][j] = "*"
@@ -94,7 +93,7 @@ for i in range(0, len(bigArray)):
         elif(bigArray[i][j] == "B"):
             viCount += 1
         elif(bigArray[i][j] != "*" and bigArray[i][j] != "L" and bigArray[i][j] != "X"):
-            verifyNumbers(i,j,bigArray,viCount)
+            viCount += verifyNumbers(i,j,bigArray)
     if(invalid):
         break
 
