@@ -2,15 +2,11 @@ import random
 import sys
 
 def isValid(array):
-    unlitCells2 = False
     for i in range(0, len(bigArray)):
         for j in range(0, len(bigArray[i])):
             if(bigArray[i][j] == "."):
-                unlitCells2 = True
-                break
-        if(unlitCells2):
-            break
-    return unlitCells2
+                return True
+    return False
 
 def countViolations(coolArray):
     numVi = 0
@@ -94,7 +90,7 @@ def findLitLight(i,j,wackyArray):
 bigArray = []
 
 with open(sys.argv[1]) as input:
-    firstLine = input.readline().split()
+    firstLine = input.readline().replace("\n","").split()
     rows = firstLine[0]
     cols = firstLine[1]
 
@@ -111,7 +107,7 @@ for i in range(0, len(bigArray)):
         break
 
 minViolations = 1000000000
-numReplications = 10000
+numReplications = 10
 bestArray = []
 if unlitCells:
     for i in range(0, numReplications):
@@ -142,6 +138,7 @@ for i in range(0,len(bestArray)):
             outputFile.write("L")
         else:
             outputFile.write(bigArray[i][j])
-    outputFile.write("\n")
+    if (i != len(bestArray) - 1):
+        outputFile.write("\n")
 
 outputFile.close()

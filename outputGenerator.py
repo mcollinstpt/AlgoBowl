@@ -140,6 +140,7 @@ def surrounded(i, j, bigArray, counter,unlitCells, lightList):
 
 def isValid(array):
     unlitCells2 = False
+    print("Not valid")
     for i in range(0, len(bigArray)):
         for j in range(0, len(bigArray[i])):
             if(bigArray[i][j] == "."):
@@ -242,6 +243,7 @@ for i in range(0,len(bestArray)):
             outputFile.write("L")
         else:
             outputFile.write(bigArray[i][j])
-    outputFile.write("\n")
+    if (i != len(bestArray) - 1):
+        outputFile.write("\n")
 
 outputFile.close()
