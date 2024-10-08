@@ -47,33 +47,35 @@ def changeToBulb(i, j, bigArray, unlitCells, lightList):
     lightList.append((i,j))
     if((i,j) in unlitCells):
         unlitCells.remove((i,j))
-    for cell in range(i+1, len(bigArray)-1):
+    # down
+    for cell in range(i+1, len(bigArray)):
         if(bigArray[cell][j] == "."):
             bigArray[cell][j] = "*"
             if((cell,j) in unlitCells):
                 unlitCells.remove((cell,j))
-        elif(bigArray[cell][j] != "*"):
+        elif(bigArray[cell][j] in "0123X"):
             break
-    for cell in range(j+1, len(bigArray[i])-1):
+    # left
+    for cell in range(j+1, len(bigArray[i])):
         if(bigArray[i][cell] == "."):
             bigArray[i][cell] = "*"
             if((i,cell) in unlitCells):
                 unlitCells.remove((i,cell))
-        elif(bigArray[i][cell] != "*"):
+        elif(bigArray[i][cell] in "0123X"):
             break
-    for cell in range(i-1, 0, -1):
+    for cell in range(i-1, -1, -1):
         if(bigArray[cell][j] == "."):
             bigArray[cell][j] = "*"
             if((cell,j) in unlitCells):
                 unlitCells.remove((cell,j))
-        elif(bigArray[cell][j] != "*"):
+        elif(bigArray[cell][j] in "0123X"):
             break
-    for cell in range(j-1, 0, -1):
+    for cell in range(j-1, -1, -1):
         if(bigArray[i][cell] == "."):
             bigArray[i][cell] = "*"
             if((j,cell) in unlitCells):
                 unlitCells.remove((j,cell))
-        elif(bigArray[i][cell] != "*"):
+        elif(bigArray[i][cell] in "0123X"):
             break
 
 def findLitLight(i,j,wackyArray):
@@ -167,16 +169,12 @@ def verifyNumbers(i,j,bigArray):
     if(bulbs != int(bigArray[i][j])):
         viCount+=1
     return viCount
-#     if(i!=0, i!= maxI...)
-#         if(i+1 == "X" and i-1== "X", ...):
-#             replace with *
-
-# open the input File
 
 bigArray = []
 unlitCells = []
 lights = []
 
+# opening file
 with open(sys.argv[1]) as input:
     firstLine = input.readline().replace("\n","").split()
     rows = firstLine[0]
@@ -191,16 +189,7 @@ for i in range(0, len(bigArray)):
     for j in range(0,len(bigArray[i])):
         if(bigArray[i][j] == "."):
             unlitCells.append((i,j))
-# known lights method
-# while true:
-#     counter = 0
-#     for i in range 0, len(bigarray)
-#         for j in range 0, len(bigarray[i])
-#             bunch of ifs
-#             ex: if(symbol != ".", "X"):
-#                     do numberfunction
-#     if counter == 0
-#         break
+
 while True:
     counter = 0
     for i in range(0, len(bigArray)):
@@ -211,16 +200,6 @@ while True:
                 surrounded(i,j,bigArray,counter,unlitCells, lights)
     if(counter == 0):
         break
-# check if any unlit cells remain
-# minViolations = 10000000000000
-# if they do:
-#     for i in 0,numReplications
-#         random :)
-#         randomly change unlit squares to lightbulbs
-#         fill the rest of unlit cells with bulbs
-#         count violations
-#         if violations < minViolations
-#             save grid
 
 minViolations = 1000000000
 numReplications = 1000
@@ -258,6 +237,3 @@ for i in range(0,len(bestArray)):
     outputFile.write("\n")
 
 outputFile.close()
-
-
-# turn grid back to normal ("*" == "." and so forth)
