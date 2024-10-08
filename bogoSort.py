@@ -44,25 +44,25 @@ def verifyNumbers(i,j,bigArray):
 def changeToBulb(i, j, bigArray, lightList):
     bigArray[i][j] = "L"
     lightList.append((i,j))
-    for cell in range(i+1, len(bigArray)-1):
+    for cell in range(i+1, len(bigArray)):
         if(bigArray[cell][j] == "."):
             bigArray[cell][j] = "*"
-        elif(bigArray[cell][j] != "*"):
+        elif(bigArray[cell][j] in "01234X"):
             break
-    for cell in range(j+1, len(bigArray[i])-1):
+    for cell in range(j+1, len(bigArray[i])):
         if(bigArray[i][cell] == "."):
             bigArray[i][cell] = "*"
-        elif(bigArray[i][cell] != "*"):
+        elif(bigArray[i][cell] in "01234X"):
             break
-    for cell in range(i-1, 0, -1):
+    for cell in range(i-1, -1, -1):
         if(bigArray[cell][j] == "."):
             bigArray[cell][j] = "*"
-        elif(bigArray[cell][j] != "*"):
+        elif(bigArray[cell][j] in "01234X"):
             break
-    for cell in range(j-1, 0, -1):
+    for cell in range(j-1, -1, -1):
         if(bigArray[i][cell] == "."):
             bigArray[i][cell] = "*"
-        elif(bigArray[i][cell] != "*"):
+        elif(bigArray[i][cell] in "01234X"):
             break
 
 def findLitLight(i,j,wackyArray):
@@ -70,17 +70,25 @@ def findLitLight(i,j,wackyArray):
         if(wackyArray[cell][j] == "L" or wackyArray[cell][j] == "B"):
             wackyArray[i][j] = "B"
             break
+        elif(wackyArray[cell][j] in "01234X"):
+            break
     for cell in range(j+1, len(wackyArray[i])):
         if(wackyArray[i][cell] == "L" or wackyArray[i][cell] == "B"):
             wackyArray[i][j] = "B"
+            break
+        elif(wackyArray[i][cell] in "01234X"):
             break
     for cell in range(i-1, -1, -1):
         if(wackyArray[cell][j] == "L" or wackyArray[cell][j] == "B"):
             wackyArray[i][j] = "B"
             break
+        elif(wackyArray[cell][j] in "01234X"):
+            break
     for cell in range(j-1, -1, -1):
         if(wackyArray[i][cell] == "L" or wackyArray[i][cell] == "B"):
             wackyArray[i][j] = "B"
+            break
+        elif(wackyArray[i][cell] in "01234X"):
             break
 
 bigArray = []
@@ -103,7 +111,7 @@ for i in range(0, len(bigArray)):
         break
 
 minViolations = 1000000000
-numReplications = 10000000000
+numReplications = 10000
 bestArray = []
 if unlitCells:
     for i in range(0, numReplications):

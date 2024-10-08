@@ -83,17 +83,25 @@ def findLitLight(i,j,wackyArray):
         if(wackyArray[cell][j] == "L" or wackyArray[cell][j] == "B"):
             wackyArray[i][j] = "B"
             break
+        elif(wackyArray[cell][j] in "01234X"):
+            break
     for cell in range(j+1, len(wackyArray[i])):
         if(wackyArray[i][cell] == "L" or wackyArray[i][cell] == "B"):
             wackyArray[i][j] = "B"
+            break
+        elif(wackyArray[i][cell] in "01234X"):
             break
     for cell in range(i-1, -1, -1):
         if(wackyArray[cell][j] == "L" or wackyArray[cell][j] == "B"):
             wackyArray[i][j] = "B"
             break
+        elif(wackyArray[cell][j] in "01234X"):
+            break
     for cell in range(j-1, -1, -1):
         if(wackyArray[i][cell] == "L" or wackyArray[i][cell] == "B"):
             wackyArray[i][j] = "B"
+            break
+        elif(wackyArray[i][cell] in "01234X"):
             break
 
 # surroundedFunction/unlitFunction
