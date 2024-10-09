@@ -193,21 +193,24 @@ while True:
     if(counter == 0):
         break
 
+unlitCellsCopy = copy.deepcopy(unlitCells)
+
 minViolations = 1000000000
-numReplications = 10000
+numReplications = 100
 bestArray = []
 if len(unlitCells) > 0:
     for i in range(0, numReplications):
         print(i)
-        tempLights = lights[:]
+        unlitCellsCopy = copy.deepcopy(unlitCells)
+        tempLights = copy.deepcopy(lights[:])
         invalid = True
-        tempArray = bigArray[:]
+        tempArray = copy.deepcopy(bigArray[:])
         while invalid:
-            if(len(unlitCells) == 0):
+            if(len(unlitCellsCopy) == 0):
                 break
-            randomCell = random.randrange(0, len(unlitCells))
-            if tempArray[unlitCells[randomCell][0]][unlitCells[randomCell][1]] == '.':
-                changeToBulb(unlitCells[randomCell][0], unlitCells[randomCell][1], tempArray, unlitCells, tempLights)
+            randomCell = random.randrange(0, len(unlitCellsCopy))
+            if tempArray[unlitCellsCopy[randomCell][0]][unlitCellsCopy[randomCell][1]] == '.':
+                changeToBulb(unlitCellsCopy[randomCell][0], unlitCellsCopy[randomCell][1], tempArray, unlitCellsCopy, tempLights)
             invalid = isValid(tempArray)
         for light in tempLights:
             findLitLight(light[0],light[1],tempArray)
