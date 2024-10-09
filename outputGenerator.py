@@ -194,7 +194,7 @@ while True:
         break
 
 minViolations = 1000000000
-numReplications = 1000
+numReplications = 10000
 bestArray = []
 if len(unlitCells) > 0:
     for i in range(0, numReplications):
