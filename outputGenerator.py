@@ -1,18 +1,7 @@
 import random
 import sys
+import copy
 
-# numberFunction:
-#     if(num == 3 and i == 0 and j!=0 and j!= maxJ)
-#         j-1 == *
-#         j+1==*
-#         i+1==*
-#     if(num==3 and i==maxI and...)
-#         ...
-#     if(num == 3 and i!=0...)
-#         check how many spots around are available
-#         if unlit == 3
-#             place *
-#             counter += 1
 def numberFunc(i, j, bigArray, counter, unlitCells, lightList):
     unlit = 0
     if(i != 0):
@@ -209,6 +198,7 @@ numReplications = 10000
 bestArray = []
 if len(unlitCells) > 0:
     for i in range(0, numReplications):
+        print(i)
         tempLights = lights[:]
         invalid = True
         tempArray = bigArray[:]
