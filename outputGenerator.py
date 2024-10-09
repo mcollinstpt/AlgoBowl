@@ -45,36 +45,31 @@ def numberFunc(i, j, bigArray, counter, unlitCells, lightList):
 def changeToBulb(i, j, bigArray, unlitCells, lightList):
     bigArray[i][j] = "L"
     lightList.append((i,j))
-    if((i,j) in unlitCells):
-        unlitCells.remove((i,j))
+    unlitCells.remove((i,j))
     # down
     for cell in range(i+1, len(bigArray)):
         if(bigArray[cell][j] == "."):
             bigArray[cell][j] = "*"
-            if((cell,j) in unlitCells):
-                unlitCells.remove((cell,j))
+            unlitCells.remove((cell,j))
         elif(bigArray[cell][j] in "0123X"):
             break
     # left
     for cell in range(j+1, len(bigArray[i])):
         if(bigArray[i][cell] == "."):
             bigArray[i][cell] = "*"
-            if((i,cell) in unlitCells):
-                unlitCells.remove((i,cell))
+            unlitCells.remove((i,cell))
         elif(bigArray[i][cell] in "0123X"):
             break
     for cell in range(i-1, -1, -1):
         if(bigArray[cell][j] == "."):
             bigArray[cell][j] = "*"
-            if((cell,j) in unlitCells):
-                unlitCells.remove((cell,j))
+            unlitCells.remove((cell,j))
         elif(bigArray[cell][j] in "0123X"):
             break
     for cell in range(j-1, -1, -1):
         if(bigArray[i][cell] == "."):
             bigArray[i][cell] = "*"
-            if((j,cell) in unlitCells):
-                unlitCells.remove((j,cell))
+            unlitCells.remove((i,cell))
         elif(bigArray[i][cell] in "0123X"):
             break
 
@@ -140,7 +135,6 @@ def surrounded(i, j, bigArray, counter,unlitCells, lightList):
 
 def isValid(array):
     unlitCells2 = False
-    print("Not valid")
     for i in range(0, len(bigArray)):
         for j in range(0, len(bigArray[i])):
             if(bigArray[i][j] == "."):
@@ -211,7 +205,7 @@ while True:
         break
 
 minViolations = 1000000000
-numReplications = 1000
+numReplications = 10000
 bestArray = []
 if len(unlitCells) > 0:
     for i in range(0, numReplications):
