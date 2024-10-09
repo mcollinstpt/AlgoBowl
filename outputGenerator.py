@@ -194,10 +194,11 @@ while True:
         break
 
 minViolations = 1000000000
-numReplications = 100000
+numReplications = 1000
 bestArray = []
 if len(unlitCells) > 0:
     for i in range(0, numReplications):
+        print(i)
         tempLights = lights[:]
         invalid = True
         tempArray = bigArray[:]
