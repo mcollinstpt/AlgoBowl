@@ -40,26 +40,26 @@ def changeToBulb(i, j, bigArray, unlitCells, lightList):
         if(bigArray[cell][j] == "."):
             bigArray[cell][j] = "*"
             unlitCells.remove((cell,j))
-        elif(bigArray[cell][j] in "0123X"):
+        elif(bigArray[cell][j] in "01234X"):
             break
     # left
     for cell in range(j+1, len(bigArray[i])):
         if(bigArray[i][cell] == "."):
             bigArray[i][cell] = "*"
             unlitCells.remove((i,cell))
-        elif(bigArray[i][cell] in "0123X"):
+        elif(bigArray[i][cell] in "01234X"):
             break
     for cell in range(i-1, -1, -1):
         if(bigArray[cell][j] == "."):
             bigArray[cell][j] = "*"
             unlitCells.remove((cell,j))
-        elif(bigArray[cell][j] in "0123X"):
+        elif(bigArray[cell][j] in "01234X"):
             break
     for cell in range(j-1, -1, -1):
         if(bigArray[i][cell] == "."):
             bigArray[i][cell] = "*"
             unlitCells.remove((i,cell))
-        elif(bigArray[i][cell] in "0123X"):
+        elif(bigArray[i][cell] in "01234X"):
             break
 
 def findLitLight(i,j,wackyArray):
@@ -198,7 +198,6 @@ numReplications = 100000
 bestArray = []
 if len(unlitCells) > 0:
     for i in range(0, numReplications):
-        print(i)
         tempLights = lights[:]
         invalid = True
         tempArray = bigArray[:]
