@@ -85,6 +85,11 @@ for i in range(0, len(bigArray)):
 
 invalid = False
 
+for i in range(0,len(bigArray)):
+    for j in range(0,len(bigArray[i])):
+        print(bigArray[i][j], end="")
+    print()
+
 for i in range(0, len(bigArray)):
     for j in range(0, len(bigArray[i])):
         if(bigArray[i][j] == "."):

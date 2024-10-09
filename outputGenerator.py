@@ -229,7 +229,7 @@ for i in range(0,len(bestArray)):
         elif(bestArray[i][j] == "B"):
             outputFile.write("L")
         else:
-            outputFile.write(bigArray[i][j])
+            outputFile.write(bestArray[i][j])
     if (i != len(bestArray) - 1):
         outputFile.write("\n")
 
