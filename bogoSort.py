@@ -37,8 +37,9 @@ def verifyNumbers(i,j,bigArray):
         viCount+=1
     return viCount
 
-def changeToBulb(i, j, bigArray):
+def changeToBulb(i, j, bigArray, lights):
     bigArray[i][j] = "L"
+    lights.append((i, j))
     for cell in range(i+1, len(bigArray)):
         if(bigArray[cell][j] == "."):
             bigArray[cell][j] = "*"
