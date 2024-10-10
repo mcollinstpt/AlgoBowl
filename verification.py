@@ -93,6 +93,7 @@ invalid = False
 for i in range(0, len(bigArray)):
     for j in range(0, len(bigArray[i])):
         if(bigArray[i][j] == "."):
+            print(i,j)
             invalid = True
             break
         elif(bigArray[i][j] == "B"):
