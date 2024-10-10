@@ -75,6 +75,12 @@ with open(sys.argv[1]) as input:
     for line in input:
         bigArray.append(list(line.replace("\n","")))
 
+originalArray = []
+with open("finalInputs/input_backup.txt") as input:
+    firstLine = input.readline().replace("\n","") # don't really need this
+    for line in input:
+        originalArray.append(list(line.replace("\n","")))
+
 viCount = 0
 
 for i in range(0, len(bigArray)):
@@ -90,22 +96,27 @@ invalid = False
 #         print(bigArray[i][j], end="")
 #     print()
 
+errorMessage = ""
 for i in range(0, len(bigArray)):
     for j in range(0, len(bigArray[i])):
         if(bigArray[i][j] == "."):
             print(i,j)
             invalid = True
+            errorMessage = "Unlit cell located!!!!!!!!"
             break
         elif(bigArray[i][j] == "B"):
             viCount += 1
         elif(bigArray[i][j] != "*" and bigArray[i][j] != "L" and bigArray[i][j] != "X"):
             viCount += verifyNumbers(i,j,bigArray)
+            if (bigArray[i][j] != originalArray[i][j]):
+                errorMessage = "Doesn't match original array"
+                invalid = True
     if(invalid):
         break
 
 if(invalid):
     print("INVALID      WRONG       BAD")
-    print("Unlit cell located!!!!!!!!")
+    print(errorMessage)
 
 elif(viCount != violations):
     print("INVALID      WRONG       BAD")
